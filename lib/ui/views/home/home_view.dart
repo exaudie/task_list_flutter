@@ -49,7 +49,7 @@ class HomeView extends StackedView<HomeViewModel> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     MaterialButton(
-                      color: kcDarkGreyColor,
+                      color: AppColors.kcDarkGreyColor,
                       child: const Text(
                         'Show Dialog',
                         style: TextStyle(
@@ -59,7 +59,7 @@ class HomeView extends StackedView<HomeViewModel> {
                       onPressed: viewModel.showDialog,
                     ),
                     MaterialButton(
-                      color: kcDarkGreyColor,
+                      color: AppColors.kcDarkGreyColor,
                       child: Text(
                         AppLocal.texts.btnShow,
                         style: const TextStyle(

@@ -19,60 +19,57 @@ const Widget verticalSpaceMedium = SizedBox(height: _mediumSize);
 const Widget verticalSpaceLarge = SizedBox(height: _largeSize);
 const Widget verticalSpaceMassive = SizedBox(height: _massiveSize);
 
-Widget spacedDivider = Column(
-  children: const <Widget>[
-    verticalSpaceMedium,
-    Divider(color: Colors.blueGrey, height: 5.0),
-    verticalSpaceMedium,
-  ],
-);
+class AppUi {
+  static Widget spacedDivider = Column(
+    children: const <Widget>[
+      verticalSpaceMedium,
+      Divider(color: Colors.blueGrey, height: 5.0),
+      verticalSpaceMedium,
+    ],
+  );
 
-Widget verticalSpace(double height) => SizedBox(height: height);
+  static Widget verticalSpace(double height) => SizedBox(height: height);
 
-double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
-double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
+  static Widget horizontalSpace(double width) => SizedBox(width: width);
 
-double screenHeightFraction(BuildContext context,
-        {int dividedBy = 1, double offsetBy = 0, double max = 3000}) =>
-    min((screenHeight(context) - offsetBy) / dividedBy, max);
+  static double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
 
-double screenWidthFraction(BuildContext context,
-        {int dividedBy = 1, double offsetBy = 0, double max = 3000}) =>
-    min((screenWidth(context) - offsetBy) / dividedBy, max);
+  static double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
-double halfScreenWidth(BuildContext context) =>
-    screenWidthFraction(context, dividedBy: 2);
+  static double screenHeightFraction(BuildContext context,
+          {int dividedBy = 1, double offsetBy = 0, double max = 3000}) =>
+      min((screenHeight(context) - offsetBy) / dividedBy, max);
 
-double thirdScreenWidth(BuildContext context) =>
-    screenWidthFraction(context, dividedBy: 3);
+  static double screenWidthFraction(BuildContext context,
+          {int dividedBy = 1, double offsetBy = 0, double max = 3000}) =>
+      min((screenWidth(context) - offsetBy) / dividedBy, max);
 
-double quarterScreenWidth(BuildContext context) =>
-    screenWidthFraction(context, dividedBy: 4);
+  static double halfScreenWidth(BuildContext context) => screenWidthFraction(context, dividedBy: 2);
 
-double getResponsiveHorizontalSpaceMedium(BuildContext context) =>
-    screenWidthFraction(context, dividedBy: 10);
-double getResponsiveSmallFontSize(BuildContext context) =>
-    getResponsiveFontSize(context, fontSize: 14, max: 15);
+  static double thirdScreenWidth(BuildContext context) => screenWidthFraction(context, dividedBy: 3);
 
-double getResponsiveMediumFontSize(BuildContext context) =>
-    getResponsiveFontSize(context, fontSize: 16, max: 17);
+  static double quarterScreenWidth(BuildContext context) => screenWidthFraction(context, dividedBy: 4);
 
-double getResponsiveLargeFontSize(BuildContext context) =>
-    getResponsiveFontSize(context, fontSize: 21, max: 31);
+  static double getResponsiveHorizontalSpaceMedium(BuildContext context) => screenWidthFraction(context, dividedBy: 10);
 
-double getResponsiveExtraLargeFontSize(BuildContext context) =>
-    getResponsiveFontSize(context, fontSize: 25);
+  static double getResponsiveSmallFontSize(BuildContext context) =>
+      getResponsiveFontSize(context, fontSize: 14, max: 15);
 
-double getResponsiveMassiveFontSize(BuildContext context) =>
-    getResponsiveFontSize(context, fontSize: 30);
+  static double getResponsiveMediumFontSize(BuildContext context) =>
+      getResponsiveFontSize(context, fontSize: 16, max: 17);
 
-double getResponsiveFontSize(BuildContext context,
-    {double? fontSize, double? max}) {
-  max ??= 100;
+  static double getResponsiveLargeFontSize(BuildContext context) =>
+      getResponsiveFontSize(context, fontSize: 21, max: 31);
 
-  var responsiveSize = min(
-      screenWidthFraction(context, dividedBy: 10) * ((fontSize ?? 100) / 100),
-      max);
+  static double getResponsiveExtraLargeFontSize(BuildContext context) => getResponsiveFontSize(context, fontSize: 25);
 
-  return responsiveSize;
+  static double getResponsiveMassiveFontSize(BuildContext context) => getResponsiveFontSize(context, fontSize: 30);
+
+  static double getResponsiveFontSize(BuildContext context, {double? fontSize, double? max}) {
+    max ??= 100;
+
+    var responsiveSize = min(screenWidthFraction(context, dividedBy: 10) * ((fontSize ?? 100) / 100), max);
+
+    return responsiveSize;
+  }
 }

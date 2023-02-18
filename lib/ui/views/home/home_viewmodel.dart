@@ -1,12 +1,10 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../../../app/app.bottomsheets.dart';
-import '../../../app/app.dialogs.dart';
 import '../../../app/app.locator.dart';
 import '../../../infrastructure/enums/bottom_sheet_type.dart';
 import '../../../infrastructure/enums/dialog_type.dart';
-import '../../../infrastructure/helpers/app_strings.dart';
+import '../../../infrastructure/helpers/app_local.dart';
 
 class HomeViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
@@ -32,8 +30,8 @@ class HomeViewModel extends BaseViewModel {
   void showBottomSheet() {
     _bottomSheetService.showCustomSheet(
       variant: BottomSheetType.notice,
-      title: ksHomeBottomSheetTitle,
-      description: ksHomeBottomSheetDescription,
+      title: AppLocal.texts.ksHomeBottomSheetTitle,
+      description: AppLocal.texts.ksHomeBottomSheetDescription,
     );
   }
 }
