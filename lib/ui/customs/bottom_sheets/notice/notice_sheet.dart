@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:task_list/ui/common/app_colors.dart';
-import 'package:task_list/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../../../infrastructure/helpers/app_colors.dart';
+import '../../../../infrastructure/helpers/app_ui.dart';
 import 'notice_sheet_model.dart';
 
 class NoticeSheet extends StackedView<NoticeSheetModel> {
   final Function(SheetResponse)? completer;
   final SheetRequest request;
+
   const NoticeSheet({
     Key? key,
     required this.completer,
