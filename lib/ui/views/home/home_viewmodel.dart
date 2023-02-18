@@ -1,9 +1,12 @@
-import 'package:task_list/app/app.bottomsheets.dart';
-import 'package:task_list/app/app.dialogs.dart';
-import 'package:task_list/app/app.locator.dart';
-import 'package:task_list/ui/common/app_strings.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+
+import '../../../app/app.bottomsheets.dart';
+import '../../../app/app.dialogs.dart';
+import '../../../app/app.locator.dart';
+import '../../../infrastructure/enums/bottom_sheet_type.dart';
+import '../../../infrastructure/enums/dialog_type.dart';
+import '../../../infrastructure/helpers/app_strings.dart';
 
 class HomeViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();

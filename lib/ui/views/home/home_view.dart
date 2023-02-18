@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:task_list/ui/common/app_colors.dart';
-import 'package:task_list/ui/common/ui_helpers.dart';
 
+import '../../../infrastructure/helpers/app_colors.dart';
+import '../../../infrastructure/helpers/app_local.dart';
+import '../../../infrastructure/helpers/app_ui.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
@@ -59,9 +60,9 @@ class HomeView extends StackedView<HomeViewModel> {
                     ),
                     MaterialButton(
                       color: kcDarkGreyColor,
-                      child: const Text(
-                        'Show Bottom Sheet',
-                        style: TextStyle(
+                      child: Text(
+                        AppLocal.texts.btnShow,
+                        style: const TextStyle(
                           color: Colors.white,
                         ),
                       ),
