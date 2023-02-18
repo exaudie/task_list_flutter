@@ -1,5 +1,10 @@
 {
+"logo":"exaudie",
+"appName":"Task List",
+"labelLoading":"Loading ...",
 "btnShow":"Tampil Bottom Sheet",
+
+
 "ksHomeBottomSheetTitle" : "Build Great Apps!",
 "ksHomeBottomSheetDescription":"Stacked is built to help you build better apps. Give us a chance and we'll prove it to you. Check out stacked.filledstacks.com to learn more"
 }
