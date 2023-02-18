@@ -47,7 +47,7 @@ class InfoAlertDialog extends StackedView<InfoAlertDialogModel> {
                       verticalSpaceTiny,
                       Text(
                         request.description!,
-                        style: const TextStyle(fontSize: 14, color: kcMediumGrey),
+                        style: const TextStyle(fontSize: 14, color: AppColors.kcMediumGrey),
                         maxLines: 3,
                         softWrap: true,
                       ),

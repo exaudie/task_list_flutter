@@ -13,8 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Task List',
       theme: Theme.of(context).copyWith(
-        primaryColor: kcBackgroundColor,
-        focusColor: kcPrimaryColor,
+        primaryColor: AppColors.kcBackgroundColor,
+        focusColor: AppColors.kcPrimaryColor,
         textTheme: Theme.of(context).textTheme.apply(
               bodyColor: Colors.black,
             ),
