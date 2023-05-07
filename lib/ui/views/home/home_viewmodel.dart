@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -10,8 +11,11 @@ class HomeViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
   final _bottomSheetService = locator<BottomSheetService>();
 
+  final searchController = TextEditingController();
+
   String get counterLabel => 'Counter is: $_counter';
 
+  bool isSearch = false;
   int _counter = 0;
 
   void incrementCounter() {
@@ -33,5 +37,11 @@ class HomeViewModel extends BaseViewModel {
       title: AppLocal.texts.ksHomeBottomSheetTitle,
       description: AppLocal.texts.ksHomeBottomSheetDescription,
     );
+  }
+
+  void onPressedToggleSearch() {
+    searchController.text = "";
+    isSearch = !isSearch;
+    notifyListeners();
   }
 }
