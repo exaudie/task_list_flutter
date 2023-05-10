@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../infrastructure/enums/menu_home.dart';
 import '../../../infrastructure/helpers/app_colors.dart';
-import '../../../infrastructure/helpers/app_local.dart';
 import '../../../infrastructure/helpers/app_ui.dart';
-import '../../shared/task_item.dart';
+import 'widgets/task_item.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
@@ -52,7 +52,7 @@ class HomeView extends StackedView<HomeViewModel> {
                   onPressed: viewModel.onPressedToggleSearch,
                   icon: const Icon(Icons.search),
                 ),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
+          _popupMenu(viewModel),
         ],
       ),
       body: SafeArea(
@@ -101,9 +101,9 @@ class HomeView extends StackedView<HomeViewModel> {
           children: [
             Expanded(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(3),
                 child: SizedBox(
-                  height: 8,
+                  height: 6,
                   child: LinearProgressIndicator(
                     value: 0.8,
                     backgroundColor: Colors.red[200],
@@ -121,9 +121,12 @@ class HomeView extends StackedView<HomeViewModel> {
   Widget _periodeTask() => Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text('07 Mei 2023 - 14 Mei 2023'),
+            const Expanded(
+                child: Text(
+              '07 Mei 2023 - 14 Mei 2023',
+              textAlign: TextAlign.center,
+            )),
             IconButton(onPressed: () {}, icon: const Icon(Icons.date_range)),
           ],
         ),
@@ -148,4 +151,20 @@ class HomeView extends StackedView<HomeViewModel> {
       ),
     );
   }
+
+  Widget _popupMenu(HomeViewModel viewModel) => PopupMenuButton(
+        icon: const Icon(Icons.menu),
+        onSelected:viewModel.onSelectedPopupMenu ,
+        itemBuilder: (context) => <PopupMenuEntry<MenuHome>>[
+          const PopupMenuItem<MenuHome>(
+            value: MenuHome.addTask,
+            child: Text('Add Task'),
+          ),
+          const PopupMenuItem<MenuHome>(
+            value: MenuHome.editPeriod,
+            child: Text('Edit Periode'),
+          ),
+        ],
+      );
 }
+

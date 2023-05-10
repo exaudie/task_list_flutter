@@ -5,3 +5,7 @@
 [stacked](https://stacked.filledstacks.com/)
 
 [Flutter_localizations](https://docs.flutter.dev/development/accessibility-and-localization/internationalization)
+
+### local storage 
+
+[Hive]()

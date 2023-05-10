@@ -7,10 +7,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i5;
+import 'package:stacked_services/stacked_services.dart' as _i7;
 import 'package:task_list/ui/views/dashboard/dashboard_view.dart' as _i4;
 import 'package:task_list/ui/views/home/home_view.dart' as _i2;
+import 'package:task_list/ui/views/settings/settings_view.dart' as _i6;
 import 'package:task_list/ui/views/startup/startup_view.dart' as _i3;
+import 'package:task_list/ui/views/task/task_view.dart' as _i5;
 
 class Routes {
   static const homeView = '/home-view';
@@ -19,10 +21,16 @@ class Routes {
 
   static const dashboardView = '/dashboard-view';
 
+  static const taskView = '/task-view';
+
+  static const settingsView = '/settings-view';
+
   static const all = <String>{
     homeView,
     startupView,
     dashboardView,
+    taskView,
+    settingsView,
   };
 }
 
@@ -39,6 +47,14 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.dashboardView,
       page: _i4.DashboardView,
+    ),
+    _i1.RouteDef(
+      Routes.taskView,
+      page: _i5.TaskView,
+    ),
+    _i1.RouteDef(
+      Routes.settingsView,
+      page: _i6.SettingsView,
     ),
   ];
 
@@ -61,6 +77,18 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+    _i5.TaskView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const _i5.TaskView(),
+        settings: data,
+      );
+    },
+    _i6.SettingsView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const _i6.SettingsView(),
+        settings: data,
+      );
+    },
   };
 
   @override
@@ -69,7 +97,7 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i5.NavigationService {
+extension NavigatorStateExtension on _i7.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -112,6 +140,34 @@ extension NavigatorStateExtension on _i5.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToTaskView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.taskView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToSettingsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.settingsView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -148,6 +204,34 @@ extension NavigatorStateExtension on _i5.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.dashboardView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithTaskView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.taskView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithSettingsView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.settingsView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
