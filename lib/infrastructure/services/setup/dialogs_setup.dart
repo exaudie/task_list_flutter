@@ -6,12 +6,10 @@
 
 import 'package:stacked_services/stacked_services.dart';
 
-import 'app.locator.dart';
-import '../ui/dialogs/info_alert/info_alert_dialog.dart';
+import '../../../app/app.locator.dart';
+import '../../../ui/customs/dialogs/info_alert/info_alert_dialog.dart';
+import '../../enums/dialog_type.dart';
 
-enum DialogType {
-  infoAlert,
-}
 
 void setupDialogUi() {
   final dialogService = locator<DialogService>();
