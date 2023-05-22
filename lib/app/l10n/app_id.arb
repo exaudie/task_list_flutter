@@ -2,6 +2,7 @@
 "logo":"exaudie",
 "appName":"Task List",
 "labelLoading":"Loading ...",
-"btnShow":"Tampil Bottom Sheet"
-
+"labelPrefixCode":"Awalan Kode",
+"btnShow":"Tampil Bottom Sheet",
+"errorRequired":"Mohon masukkan teks"
 }

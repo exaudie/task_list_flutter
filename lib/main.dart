@@ -5,12 +5,17 @@ import 'package:flutter/material.dart';
 
 import 'app/app.locator.dart';
 import 'app/my_app.dart';
+import 'infrastructure/databases/hive_db.dart';
 import 'infrastructure/services/setup/bottomsheets_setup.dart';
 import 'infrastructure/services/setup/dialogs_setup.dart';
 
-void main() {
-  runZonedGuarded(() {
-    setupLocator();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runZonedGuarded(() async {
+    await HiveDb.init();
+
+    await setupLocator();
     setupDialogUi();
     setupBottomSheetUi();
 
