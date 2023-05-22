@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:stacked/stacked.dart';
-import 'package:task_list/infrastructure/helpers/app_colors.dart';
 
-import '../../../infrastructure/helpers/app_local.dart';
-import '../../../infrastructure/helpers/app_text_style.dart';
-import '../../../infrastructure/helpers/app_ui.dart';
+import '../../../infrastructure/helpers/colors_app.dart';
+import '../../../infrastructure/helpers/localize_app.dart';
+import '../../../infrastructure/helpers/text_style_app.dart';
+import '../../../infrastructure/helpers/ui_app.dart';
 import 'startup_viewmodel.dart';
 
 class StartupView extends StackedView<StartupViewModel> {
@@ -25,19 +25,19 @@ class StartupView extends StackedView<StartupViewModel> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(AppLocal.texts.logo, style: AppTextStyle.text40w900),
-            Text(AppLocal.texts.appName, style: AppTextStyle.text18w900),
-            AppUi.verticalSpace(24),
+            Text(LocalizeApp.texts.logo, style: TextStyleApp.text40w900),
+            Text(LocalizeApp.texts.appName, style: TextStyleApp.text18w900),
+            UiApp.verticalSpace(24),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(AppLocal.texts.labelLoading, style: AppTextStyle.text16w400),
-                AppUi.horizontalSpace(16),
+                Text(LocalizeApp.texts.labelLoading, style: TextStyleApp.text16w400),
+                UiApp.horizontalSpace(16),
                 const SizedBox(
                   width: 16,
                   height: 16,
                   child: CircularProgressIndicator(
-                    color: AppColors.kcDarkGreyColor,
+                    color: ColorsApp.kcDarkGreyColor,
                     strokeWidth: 3,
                   ),
                 )

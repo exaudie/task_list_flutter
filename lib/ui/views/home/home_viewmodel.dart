@@ -7,7 +7,7 @@ import '../../../app/app.locator.dart';
 import '../../../infrastructure/enums/bottom_sheet_type.dart';
 import '../../../infrastructure/enums/dialog_type.dart';
 import '../../../infrastructure/enums/menu_home.dart';
-import '../../../infrastructure/helpers/app_local.dart';
+import '../../../infrastructure/helpers/localize_app.dart';
 
 class HomeViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
@@ -15,6 +15,12 @@ class HomeViewModel extends BaseViewModel {
   final _bottomSheetService = locator<BottomSheetService>();
 
   final searchController = TextEditingController();
+
+  List<Map<String, dynamic>> popupMenuList = [
+    {'label': 'Add Task', 'value': MenuHome.addTask},
+    {'label': 'Period', 'value': MenuHome.period},
+    {'label': 'Settings', 'value': MenuHome.setting},
+  ];
 
   String get counterLabel => 'Counter is: $_counter';
 
@@ -37,8 +43,8 @@ class HomeViewModel extends BaseViewModel {
   void showBottomSheet() {
     _bottomSheetService.showCustomSheet(
       variant: BottomSheetType.notice,
-      title: AppLocal.texts.ksHomeBottomSheetTitle,
-      description: AppLocal.texts.ksHomeBottomSheetDescription,
+      title: LocalizeApp.texts.ksHomeBottomSheetTitle,
+      description: LocalizeApp.texts.ksHomeBottomSheetDescription,
     );
   }
 
@@ -52,6 +58,12 @@ class HomeViewModel extends BaseViewModel {
     switch (value) {
       case MenuHome.addTask:
         _navigationService.navigateTo(Routes.taskView);
+        break;
+      case MenuHome.period:
+        _navigationService.navigateTo(Routes.taskView);
+        break;
+      case MenuHome.setting:
+        _navigationService.navigateTo(Routes.settingsView);
         break;
     }
   }

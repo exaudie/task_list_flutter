@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../infrastructure/enums/menu_home.dart';
-import '../../../infrastructure/helpers/app_colors.dart';
-import '../../../infrastructure/helpers/app_ui.dart';
+import '../../../infrastructure/helpers/colors_app.dart';
+import '../../../infrastructure/helpers/ui_app.dart';
 import 'widgets/task_item.dart';
 import 'home_viewmodel.dart';
 
@@ -44,7 +44,7 @@ class HomeView extends StackedView<HomeViewModel> {
                 ),
         ),
         elevation: 0,
-        backgroundColor: AppColors.kcLightGrey,
+        backgroundColor: ColorsApp.kcLightGrey,
         actions: [
           viewModel.isSearch
               ? const SizedBox.shrink()
@@ -71,7 +71,7 @@ class HomeView extends StackedView<HomeViewModel> {
 
   Widget _filterItem({required String label, bool selected = false}) => Container(
         decoration: BoxDecoration(
-          color: selected ? AppColors.kcVeryLightGrey : Colors.grey[100],
+          color: selected ? ColorsApp.kcVeryLightGrey : Colors.grey[100],
           borderRadius: BorderRadius.circular(18),
         ),
         margin: const EdgeInsets.symmetric(horizontal: 6),
@@ -112,7 +112,7 @@ class HomeView extends StackedView<HomeViewModel> {
                 ),
               ),
             ),
-            AppUi.horizontalSpace(16),
+            UiApp.horizontalSpace(16),
             const Text('80 / 100'),
           ],
         ),
@@ -154,17 +154,14 @@ class HomeView extends StackedView<HomeViewModel> {
 
   Widget _popupMenu(HomeViewModel viewModel) => PopupMenuButton(
         icon: const Icon(Icons.menu),
-        onSelected:viewModel.onSelectedPopupMenu ,
-        itemBuilder: (context) => <PopupMenuEntry<MenuHome>>[
-          const PopupMenuItem<MenuHome>(
-            value: MenuHome.addTask,
-            child: Text('Add Task'),
+        onSelected: viewModel.onSelectedPopupMenu,
+        itemBuilder: (context) => List<PopupMenuEntry<MenuHome>>.from(
+          viewModel.popupMenuList.map(
+            (element) => PopupMenuItem<MenuHome>(
+              value: element['value'],
+              child: Text(element['label']),
+            ),
           ),
-          const PopupMenuItem<MenuHome>(
-            value: MenuHome.editPeriod,
-            child: Text('Edit Periode'),
-          ),
-        ],
+        ),
       );
 }
-

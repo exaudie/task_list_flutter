@@ -2,9 +2,11 @@
 "logo":"exaudie",
 "appName":"Task List",
 "labelLoading":"Loading ...",
+"labelPrefixCode":"Prefix Code",
 "btnShow":"Tampil Bottom Sheet",
 "titlePageProfile":"Profile",
 "titlePageHome":"Home",
+"errorRequired":"Please enter some text",
 
 "ksHomeBottomSheetTitle" : "Build Great Apps!",
 "ksHomeBottomSheetDescription":"Stacked is built to help you build better apps. Give us a chance and we'll prove it to you. Check out stacked.filledstacks.com to learn more"

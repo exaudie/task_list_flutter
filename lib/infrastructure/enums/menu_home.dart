@@ -1,5 +1,5 @@
 enum MenuHome {
   addTask,
-  editPeriod,
+  period,
   setting,
 }

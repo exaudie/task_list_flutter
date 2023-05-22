@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../infrastructure/helpers/app_local.dart';
+import '../../../infrastructure/helpers/localize_app.dart';
 import 'profile_viewmodel.dart';
 
 class ProfileView extends StackedView<ProfileViewModel> {
@@ -14,13 +14,13 @@ class ProfileView extends StackedView<ProfileViewModel> {
   Widget builder(BuildContext context, ProfileViewModel viewModel, Widget? child) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocal.texts.titlePageProfile),
+        title: Text(LocalizeApp.texts.titlePageProfile),
       ),
       body: Center(
         child: Column(
           children: [
-            Text(AppLocal.texts.titlePageProfile),
-            ElevatedButton(onPressed:viewModel.onPressedToHome, child: Text(AppLocal.texts.titlePageHome))
+            Text(LocalizeApp.texts.titlePageProfile),
+            ElevatedButton(onPressed:viewModel.onPressedToHome, child: Text(LocalizeApp.texts.titlePageHome))
           ],
         ),
       ),

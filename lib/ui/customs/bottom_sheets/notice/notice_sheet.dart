@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../../../../infrastructure/helpers/app_colors.dart';
-import '../../../../infrastructure/helpers/app_ui.dart';
+import '../../../../infrastructure/helpers/colors_app.dart';
+import '../../../../infrastructure/helpers/ui_app.dart';
 import 'notice_sheet_model.dart';
 
 class NoticeSheet extends StackedView<NoticeSheetModel> {
@@ -35,7 +35,7 @@ class NoticeSheet extends StackedView<NoticeSheetModel> {
           verticalSpaceTiny,
           Text(
             request.description!,
-            style: const TextStyle(fontSize: 14, color: AppColors.kcMediumGrey),
+            style: const TextStyle(fontSize: 14, color: ColorsApp.kcMediumGrey),
             maxLines: 3,
             softWrap: true,
           ),
