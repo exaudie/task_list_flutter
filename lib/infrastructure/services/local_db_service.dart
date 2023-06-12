@@ -1,4 +1,6 @@
-import 'package:hive/hive.dart';
+import 'dart:developer';
+
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../databases/settings/settings_db.dart';
 import '../databases/tasks/tasks_db.dart';
@@ -21,8 +23,21 @@ class LocalDbService {
     try {
       Box dataBox = Hive.box<TasksDb>(tasksBox);
       if (dataBox.length > 0) {
-        return await dataBox.getAt(0);
+        return await dataBox.get(0);
       }
+      return null;
+    } on HiveError catch (_) {
+      return null;
+    }
+  }
+
+  Future<int?> getLastTaskId() async {
+    try {
+      Box dataBox = Hive.box<TasksDb>(tasksBox);
+      if (dataBox.length > 0) {
+        return await dataBox.values.last.taskId;
+      }
+
       return null;
     } on HiveError catch (_) {
       return null;

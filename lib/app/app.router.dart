@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// StackedRouterGenerator
+// StackedNavigatorGenerator
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:flutter/material.dart' as _i7;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i7;
+import 'package:stacked_services/stacked_services.dart' as _i8;
 import 'package:task_list/ui/views/dashboard/dashboard_view.dart' as _i4;
 import 'package:task_list/ui/views/home/home_view.dart' as _i2;
 import 'package:task_list/ui/views/settings/settings_view.dart' as _i6;
@@ -60,31 +61,31 @@ class StackedRouter extends _i1.RouterBase {
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return _i7.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return _i7.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.DashboardView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return _i7.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.DashboardView(),
         settings: data,
       );
     },
     _i5.TaskView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return _i7.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.TaskView(),
         settings: data,
       );
     },
     _i6.SettingsView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return _i7.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.SettingsView(),
         settings: data,
       );
@@ -97,7 +98,7 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i7.NavigationService {
+extension NavigatorStateExtension on _i8.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
