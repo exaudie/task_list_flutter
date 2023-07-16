@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:task_list/infrastructure/models/task_model.dart';
 
 import '../../../../infrastructure/helpers/ui_app.dart';
 
 class TaskItem extends StatelessWidget {
-  const TaskItem({super.key});
+  final TaskModel task;
+
+  const TaskItem({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +15,8 @@ class TaskItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _topItem(),
-          _titleItem(),
+          _topItem(task),
+          _titleItem(task?.taskTitle ?? ''),
           _descItem(),
           _bottomItem(),
         ],
@@ -33,12 +36,12 @@ class TaskItem extends StatelessWidget {
         ),
       );
 
-  Widget _topItem() => Padding(
+  Widget _topItem(TaskModel task) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text('EXAU - 123'),
+            Text(task?.taskCode ?? ''),
             const Spacer(),
             _itemStatus(label: '99'),
             horizontalSpaceSmall,
@@ -73,14 +76,14 @@ class TaskItem extends StatelessWidget {
         ),
       );
 
-  Widget _titleItem() => Container(
+  Widget _titleItem(String title) => Container(
         width: double.infinity,
         color: Colors.grey[100],
         margin: const EdgeInsets.symmetric(vertical: 4),
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4),
-        child: const Text(
-          'Layouting home view',
-          style: TextStyle(
+        child: Text(
+          title,
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),

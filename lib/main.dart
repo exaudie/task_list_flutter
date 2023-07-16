@@ -10,9 +10,8 @@ import 'infrastructure/services/setup/bottomsheets_setup.dart';
 import 'infrastructure/services/setup/dialogs_setup.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
   runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
     await HiveDb.init();
 
     await setupLocator();
@@ -21,6 +20,6 @@ void main() async {
 
     runApp(const MyApp());
   }, (error, stack) {
-    developer.log(name: 'runApp', '$error $stack');
+    developer.log(name: 'runAppMain', '$error $stack');
   });
 }
