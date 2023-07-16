@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:task_list/infrastructure/models/task_model.dart';
 
 import '../../../infrastructure/enums/menu_home.dart';
 import '../../../infrastructure/helpers/colors_app.dart';
@@ -62,7 +63,7 @@ class HomeView extends StackedView<HomeViewModel> {
             _periodeTask(),
             _progressTask(),
             verticalSpaceSmall,
-            _taskList(),
+            _taskList(viewModel),
           ],
         ),
       ),
@@ -86,12 +87,12 @@ class HomeView extends StackedView<HomeViewModel> {
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
         child: ListView(
           shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
           children: [
             _filterItem(label: 'All'),
             _filterItem(label: 'Active', selected: true),
             _filterItem(label: 'Backlog'),
           ],
-          scrollDirection: Axis.horizontal,
         ),
       );
 
@@ -132,17 +133,20 @@ class HomeView extends StackedView<HomeViewModel> {
         ),
       );
 
-  Widget _taskList() {
+  Widget _taskList(HomeViewModel viewModel) {
     return Expanded(
       child: ListView.separated(
-        itemBuilder: (context, index) => index == 9
-            ? Divider(
-                color: Colors.grey[200],
-                thickness: 24,
-                height: 24,
-              )
-            : const TaskItem(),
-        itemCount: 10,
+        itemBuilder: (context, index) {
+          TaskModel task = viewModel.taskList[index];
+          return index == (viewModel.taskList.length)
+              ? Divider(
+                  color: Colors.grey[200],
+                  thickness: 24,
+                  height: 24,
+                )
+              : TaskItem(task: task);
+        },
+        itemCount: viewModel.taskList.length,
         separatorBuilder: (context, index) => Divider(
           color: Colors.grey[200],
           thickness: 8,

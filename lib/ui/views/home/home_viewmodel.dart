@@ -1,7 +1,12 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:task_list/app/app.router.dart';
+import 'package:task_list/infrastructure/databases/tasks/tasks_db.dart';
+import 'package:task_list/infrastructure/models/task_model.dart';
+import 'package:task_list/infrastructure/services/local_db_service.dart';
 
 import '../../../app/app.locator.dart';
 import '../../../infrastructure/enums/bottom_sheet_type.dart';
@@ -9,10 +14,11 @@ import '../../../infrastructure/enums/dialog_type.dart';
 import '../../../infrastructure/enums/menu_home.dart';
 import '../../../infrastructure/helpers/localize_app.dart';
 
-class HomeViewModel extends BaseViewModel {
+class HomeViewModel extends FutureViewModel {
   final _navigationService = locator<NavigationService>();
   final _dialogService = locator<DialogService>();
   final _bottomSheetService = locator<BottomSheetService>();
+  final _localDbService = locator<LocalDbService>();
 
   final searchController = TextEditingController();
 
@@ -21,11 +27,26 @@ class HomeViewModel extends BaseViewModel {
     {'label': 'Period', 'value': MenuHome.period},
     {'label': 'Settings', 'value': MenuHome.setting},
   ];
+  List<TaskModel> taskList = [];
 
   String get counterLabel => 'Counter is: $_counter';
 
   bool isSearch = false;
   int _counter = 0;
+
+  @override
+  Future futureToRun() async {
+    await initTaskListView();
+  }
+
+  Future<void> initTaskListView() async {
+    var tasks = await _localDbService.getTasks();
+
+    if (tasks == null) return;
+    developer.log('${tasks.length}');
+    taskList = List.from(tasks.map((e) => TaskModel.formStorage(e)));
+    developer.log('${taskList.length}');
+  }
 
   void incrementCounter() {
     _counter++;
