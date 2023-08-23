@@ -23,7 +23,7 @@ class TasksDbAdapter extends TypeAdapter<TasksDb> {
       ..taskDesc = fields[3] as String?
       ..taskPoint = fields[4] as int?
       ..taskStatus = fields[5] as int?
-      ..taskCreateDate = fields[6] as int?;
+      ..taskCreateDate = fields[6] as DateTime?;
   }
 
   @override

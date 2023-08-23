@@ -1,10 +1,10 @@
-import 'dart:developer';
+import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:task_list/infrastructure/helpers/validate_field_app.dart';
 
 import '../../../infrastructure/helpers/ui_app.dart';
+import '../../../infrastructure/helpers/validate_field_app.dart';
 import '../../shared/text_field_app.dart';
 import 'task_viewmodel.dart';
 
@@ -33,6 +33,7 @@ class TaskView extends StackedView<TaskViewModel> {
                   SizedBox(
                     width: 100,
                     child: TextFieldApp(
+                      readOnly: true,
                       controller: viewModel.taskCodeController,
                     ),
                   ),
@@ -69,7 +70,7 @@ class TaskView extends StackedView<TaskViewModel> {
                         DropdownMenuItem(value: 1, child: Text('to do')),
                       ],
                       onChanged: (value) {
-                        log('$value', name: 'value dropdown');
+                        developer.log('$value', name: 'value dropdown');
                       },
                     ),
                   ),

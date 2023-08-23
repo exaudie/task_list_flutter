@@ -1,11 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:task_list/infrastructure/databases/tasks/tasks_db.dart';
 
 import '../../../app/app.locator.dart';
+import '../../../infrastructure/databases/tasks/tasks_db.dart';
 import '../../../infrastructure/services/local_db_service.dart';
 
 class TaskViewModel extends FutureViewModel {
@@ -34,10 +32,13 @@ class TaskViewModel extends FutureViewModel {
     if (formKey.currentState != null && formKey.currentState!.validate()) {
       TasksDb task = TasksDb();
       task.taskCode = taskCodeController.text;
-     await _localDbService.storeTasks(task);
+      task.taskTitle = taskTitleController.text;
+      task.taskDesc = taskDescController.text;
+      task.taskPoint = int.tryParse(taskPointController.text) ?? 0;
+      await _localDbService.storeTasks(task);
 
-var snackbaar = SnackbarService();
-snackbaar.showSnackbar(message: 'saved task');
+      var snackbaar = SnackbarService();
+      snackbaar.showSnackbar(message: 'saved task');
     }
   }
 }

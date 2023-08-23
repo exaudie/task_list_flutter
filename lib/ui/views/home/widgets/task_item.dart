@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:task_list/infrastructure/models/task_model.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../infrastructure/helpers/ui_app.dart';
+import '../../../../infrastructure/models/task_model.dart';
 
 class TaskItem extends StatelessWidget {
   final TaskModel task;
@@ -17,8 +18,8 @@ class TaskItem extends StatelessWidget {
         children: [
           _topItem(task),
           _titleItem(task?.taskTitle ?? ''),
-          _descItem(),
-          _bottomItem(),
+          _descItem(task?.taskDesc),
+          _bottomItem(task),
         ],
       ),
     );
@@ -43,7 +44,7 @@ class TaskItem extends StatelessWidget {
           children: [
             Text(task?.taskCode ?? ''),
             const Spacer(),
-            _itemStatus(label: '99'),
+            _itemStatus(label: '${task?.taskPoint ?? 0}'),
             horizontalSpaceSmall,
             IconButton(
               padding: EdgeInsets.zero,
@@ -55,7 +56,7 @@ class TaskItem extends StatelessWidget {
         ),
       );
 
-  Widget _bottomItem() => Padding(
+  Widget _bottomItem(TaskModel task) => Padding(
         padding: const EdgeInsets.only(right: 16, top: 16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -66,12 +67,12 @@ class TaskItem extends StatelessWidget {
               size: 12,
             ),
             horizontalSpaceTiny,
-            const Text(
-              '9 Mei 2023 20:23:00',
-              style: TextStyle(fontSize: 12),
+            Text(
+              DateFormat.yMd().format(task?.taskCreateDate ?? DateTime.now()),
+              style: const TextStyle(fontSize: 12),
             ),
             horizontalSpaceTiny,
-            _itemStatus(label: 'In Progress'),
+            _itemStatus(label: '${task?.taskStatus}'),
           ],
         ),
       );
@@ -91,11 +92,11 @@ class TaskItem extends StatelessWidget {
         ),
       );
 
-  Widget _descItem() => const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+  Widget _descItem(String? desc) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Text(
-          'Description ...',
-          style: TextStyle(color: Colors.grey),
+          desc ?? 'Description ...',
+          style: const TextStyle(color: Colors.grey),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),

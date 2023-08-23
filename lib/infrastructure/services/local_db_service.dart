@@ -12,6 +12,7 @@ class LocalDbService {
   Future<void> storeTasks(TasksDb tasks) async {
     Box dataBox = Hive.box<TasksDb>(tasksBox);
     tasks.taskId = dataBox.length + 1;
+    tasks.taskCreateDate = DateTime.now();
     await dataBox.add(tasks);
   }
 
@@ -60,7 +61,7 @@ class LocalDbService {
     try {
       Box dataBox = Hive.box<SettingsDb>(settingsBox);
       if (dataBox.length > 0) {
-        return await dataBox.getAt(0);
+        return await dataBox.values.first;
       }
 
       return null;

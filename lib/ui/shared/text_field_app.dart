@@ -5,6 +5,7 @@ import '../../infrastructure/helpers/text_style_app.dart';
 
 class TextFieldApp extends StatelessWidget {
   final Color fillColor;
+  final bool readOnly;
   final IconData? prefixIcon;
   final String? labelText;
   final IconData? suffix;
@@ -23,6 +24,7 @@ class TextFieldApp extends StatelessWidget {
     this.obscureText = false,
     this.validator,
     this.controller,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override
@@ -31,6 +33,7 @@ class TextFieldApp extends StatelessWidget {
       children: [
         TextFormField(
           controller: controller,
+          readOnly: readOnly,
           obscureText: obscureText,
           style: TextStyleApp.text12w700,
           decoration: InputDecoration(
