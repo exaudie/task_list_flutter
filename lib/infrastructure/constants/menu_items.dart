@@ -5,5 +5,6 @@ class MenuItems {
     {'label': 'Add Task', 'value': MenuHome.addTask},
     {'label': 'Period', 'value': MenuHome.period},
     {'label': 'Settings', 'value': MenuHome.setting},
+    {'label': 'Task Status', 'value': MenuHome.taskStatus},
   ];
 }

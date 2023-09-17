@@ -1,13 +1,8 @@
 import 'localize_app.dart';
 
 class ValidateFieldApp {
-  static String? validateRequired(String? value) {
-    if (value == null || value.isEmpty) {
-      return LocalizeApp.texts.errorRequired;
-    }
-
-    return null;
-  }
+  static String? validateRequired(String? value) =>
+      (value == null || value.isEmpty) ? LocalizeApp.texts.errorRequired : null;
 
   static String? validatePrefixCode(String? value) {
     String? required = validateRequired(value);

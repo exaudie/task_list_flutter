@@ -9,6 +9,7 @@ import '../ui/views/home/home_view.dart';
 import '../ui/views/settings/settings_view.dart';
 import '../ui/views/startup/startup_view.dart';
 import '../ui/views/task/task_view.dart';
+import '../ui/views/task_status/task_status_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -18,6 +19,7 @@ import '../ui/views/task/task_view.dart';
     MaterialRoute(page: DashboardView),
     MaterialRoute(page: TaskView),
     MaterialRoute(page: SettingsView),
+    MaterialRoute(page: TaskStatusView),
 // @stacked-route
   ],
   dependencies: [

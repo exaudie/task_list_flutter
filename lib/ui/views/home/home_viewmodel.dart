@@ -3,16 +3,16 @@ import 'dart:developer' as developer;
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:task_list/app/app.router.dart';
-import 'package:task_list/infrastructure/models/task_model.dart';
-import 'package:task_list/infrastructure/services/local_db_service.dart';
 
 import '../../../app/app.locator.dart';
+import '../../../app/app.router.dart';
 import '../../../infrastructure/databases/settings/settings_db.dart';
 import '../../../infrastructure/enums/bottom_sheet_type.dart';
 import '../../../infrastructure/enums/dialog_type.dart';
 import '../../../infrastructure/enums/menu_home.dart';
 import '../../../infrastructure/helpers/localize_app.dart';
+import '../../../infrastructure/models/task_model.dart';
+import '../../../infrastructure/services/local_db_service.dart';
 
 class HomeViewModel extends FutureViewModel {
   final _navigationService = locator<NavigationService>();
@@ -38,9 +38,9 @@ class HomeViewModel extends FutureViewModel {
     var tasks = await _localDbService.getTasks();
 
     if (tasks == null) return;
-    developer.log('${tasks.length}');
+    developer.log('${tasks.length}', name: 'tasks');
     taskList = List.from(tasks.map((e) => TaskModel.formStorage(e)));
-    developer.log('${taskList.length}');
+    developer.log('${taskList.length}', name: 'taskList');
   }
 
   void incrementCounter() {
@@ -80,6 +80,9 @@ class HomeViewModel extends FutureViewModel {
         break;
       case MenuHome.setting:
         _toSettingTask();
+        break;
+      case MenuHome.taskStatus:
+        _navigationService.navigateTo(Routes.taskStatusView);
         break;
     }
   }
