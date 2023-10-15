@@ -7,7 +7,7 @@ class TaskModel {
   String? taskDesc;
   int? taskPoint;
   int? taskStatus;
-  int? taskCreateDate;
+  DateTime? taskCreateDate;
 
   TaskModel({
     this.taskId,

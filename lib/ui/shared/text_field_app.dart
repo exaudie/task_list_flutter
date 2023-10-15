@@ -5,24 +5,30 @@ import '../../infrastructure/helpers/text_style_app.dart';
 
 class TextFieldApp extends StatelessWidget {
   final Color fillColor;
+  final bool readOnly;
   final IconData? prefixIcon;
   final String? labelText;
+  final String? hintText;
   final IconData? suffix;
   final VoidCallback? onTabSuffix;
   final bool obscureText;
   final FormFieldValidator? validator;
   final TextEditingController? controller;
+  final FocusNode? focusNode;
 
   const TextFieldApp({
     Key? key,
     this.fillColor = ColorsApp.kcVeryLightGrey,
     this.prefixIcon,
     this.labelText,
+    this.hintText,
     this.suffix,
     this.onTabSuffix,
     this.obscureText = false,
     this.validator,
     this.controller,
+    this.focusNode,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override
@@ -31,9 +37,12 @@ class TextFieldApp extends StatelessWidget {
       children: [
         TextFormField(
           controller: controller,
+          focusNode: focusNode,
+          readOnly: readOnly,
           obscureText: obscureText,
           style: TextStyleApp.text12w700,
           decoration: InputDecoration(
+            hintText: hintText,
             suffix: suffix == null
                 ? null
                 : IconButton(
@@ -45,7 +54,7 @@ class TextFieldApp extends StatelessWidget {
                       color: ColorsApp.kcPrimaryColorDark,
                     ),
                   ),
-            contentPadding: const EdgeInsets.all(8),
+            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             prefixIcon: prefixIcon == null
                 ? null
                 : Icon(

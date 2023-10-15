@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:task_list/infrastructure/models/task_model.dart';
 
+import '../../../infrastructure/constants/menu_items.dart';
 import '../../../infrastructure/enums/menu_home.dart';
 import '../../../infrastructure/helpers/colors_app.dart';
 import '../../../infrastructure/helpers/ui_app.dart';
-import 'widgets/task_item.dart';
+import '../../../infrastructure/models/task_model.dart';
 import 'home_viewmodel.dart';
+import 'widgets/task_item.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
   const HomeView({Key? key}) : super(key: key);
@@ -18,32 +19,7 @@ class HomeView extends StackedView<HomeViewModel> {
   Widget builder(BuildContext context, HomeViewModel viewModel, Widget? child) {
     return Scaffold(
       appBar: AppBar(
-        title: SizedBox(
-          height: 36,
-          child: viewModel.isSearch
-              ? TextField(
-                  controller: viewModel.searchController,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    contentPadding: const EdgeInsets.only(top: 4, right: 12, left: 12),
-                    hintText: 'search title or code',
-                    suffixIcon: IconButton(
-                      constraints: const BoxConstraints(),
-                      padding: EdgeInsets.zero,
-                      onPressed: viewModel.onPressedToggleSearch,
-                      icon: const Icon(Icons.clear),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                  ),
-                )
-              : const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Task List'),
-                ),
-        ),
+        title: _titleAppBar(viewModel),
         elevation: 0,
         backgroundColor: ColorsApp.kcLightGrey,
         actions: [
@@ -60,7 +36,7 @@ class HomeView extends StackedView<HomeViewModel> {
         child: Column(
           children: [
             _filterList(),
-            _periodeTask(),
+            _periodTask(),
             _progressTask(),
             verticalSpaceSmall,
             _taskList(viewModel),
@@ -69,6 +45,33 @@ class HomeView extends StackedView<HomeViewModel> {
       ),
     );
   }
+
+  Widget _titleAppBar(HomeViewModel viewModel) => SizedBox(
+        height: 36,
+        child: viewModel.isSearch
+            ? TextField(
+                controller: viewModel.searchController,
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  contentPadding: const EdgeInsets.only(top: 4, right: 12, left: 12),
+                  hintText: 'search title or code',
+                  suffixIcon: IconButton(
+                    constraints: const BoxConstraints(),
+                    padding: EdgeInsets.zero,
+                    onPressed: viewModel.onPressedToggleSearch,
+                    icon: const Icon(Icons.clear),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                ),
+              )
+            : const Align(
+                alignment: Alignment.centerLeft,
+                child: Text('Task List'),
+              ),
+      );
 
   Widget _filterItem({required String label, bool selected = false}) => Container(
         decoration: BoxDecoration(
@@ -119,7 +122,7 @@ class HomeView extends StackedView<HomeViewModel> {
         ),
       );
 
-  Widget _periodeTask() => Container(
+  Widget _periodTask() => Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Row(
           children: [
@@ -160,7 +163,7 @@ class HomeView extends StackedView<HomeViewModel> {
         icon: const Icon(Icons.menu),
         onSelected: viewModel.onSelectedPopupMenu,
         itemBuilder: (context) => List<PopupMenuEntry<MenuHome>>.from(
-          viewModel.popupMenuList.map(
+          MenuItems.popupMenuList.map(
             (element) => PopupMenuItem<MenuHome>(
               value: element['value'],
               child: Text(element['label']),

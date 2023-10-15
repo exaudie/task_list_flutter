@@ -23,5 +23,5 @@ class TasksDb extends HiveObject {
   int? taskStatus;
 
   @HiveField(6)
-  int? taskCreateDate;
+  DateTime? taskCreateDate;
 }

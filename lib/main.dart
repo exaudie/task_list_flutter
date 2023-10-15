@@ -17,6 +17,7 @@ void main() async {
     await setupLocator();
     setupDialogUi();
     setupBottomSheetUi();
+    HiveDb.setUpSettings();
 
     runApp(const MyApp());
   }, (error, stack) {

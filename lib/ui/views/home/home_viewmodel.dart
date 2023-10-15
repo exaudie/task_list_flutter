@@ -3,16 +3,16 @@ import 'dart:developer' as developer;
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:task_list/app/app.router.dart';
-import 'package:task_list/infrastructure/databases/tasks/tasks_db.dart';
-import 'package:task_list/infrastructure/models/task_model.dart';
-import 'package:task_list/infrastructure/services/local_db_service.dart';
 
 import '../../../app/app.locator.dart';
+import '../../../app/app.router.dart';
+import '../../../infrastructure/databases/settings/settings_db.dart';
 import '../../../infrastructure/enums/bottom_sheet_type.dart';
 import '../../../infrastructure/enums/dialog_type.dart';
 import '../../../infrastructure/enums/menu_home.dart';
 import '../../../infrastructure/helpers/localize_app.dart';
+import '../../../infrastructure/models/task_model.dart';
+import '../../../infrastructure/services/local_db_service.dart';
 
 class HomeViewModel extends FutureViewModel {
   final _navigationService = locator<NavigationService>();
@@ -22,11 +22,6 @@ class HomeViewModel extends FutureViewModel {
 
   final searchController = TextEditingController();
 
-  List<Map<String, dynamic>> popupMenuList = [
-    {'label': 'Add Task', 'value': MenuHome.addTask},
-    {'label': 'Period', 'value': MenuHome.period},
-    {'label': 'Settings', 'value': MenuHome.setting},
-  ];
   List<TaskModel> taskList = [];
 
   String get counterLabel => 'Counter is: $_counter';
@@ -43,9 +38,9 @@ class HomeViewModel extends FutureViewModel {
     var tasks = await _localDbService.getTasks();
 
     if (tasks == null) return;
-    developer.log('${tasks.length}');
+    developer.log('${tasks.length}', name: 'tasks');
     taskList = List.from(tasks.map((e) => TaskModel.formStorage(e)));
-    developer.log('${taskList.length}');
+    developer.log('${taskList.length}', name: 'taskList');
   }
 
   void incrementCounter() {
@@ -78,14 +73,28 @@ class HomeViewModel extends FutureViewModel {
   void onSelectedPopupMenu(MenuHome value) {
     switch (value) {
       case MenuHome.addTask:
-        _navigationService.navigateTo(Routes.taskView);
+        _toAddTask();
         break;
       case MenuHome.period:
         _navigationService.navigateTo(Routes.taskView);
         break;
       case MenuHome.setting:
-        _navigationService.navigateTo(Routes.settingsView);
+        _toSettingTask();
+        break;
+      case MenuHome.taskStatus:
+        _navigationService.navigateTo(Routes.taskStatusView);
         break;
     }
+  }
+
+  void _toSettingTask() => _navigationService.navigateTo(Routes.settingsView);
+
+  Future<void> _toAddTask() async {
+    final SettingsDb? settings = await _localDbService.getSettings();
+    final String prefixCode = settings?.prefixCode ?? '';
+
+    if (prefixCode == '') return _toSettingTask();
+
+    _navigationService.navigateTo(Routes.taskView);
   }
 }
